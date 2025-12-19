@@ -7,7 +7,18 @@ const app = express();
 const PORT = process.env.PORT || 5001;
 app.use(express.json());
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://localhost:3005', 'https://exam-scheduler-frontend.vercel.app', process.env.FRONTEND_URL],
+  origin: function(origin, callback) {
+    const allowedOrigins = [
+      'http://localhost:3000',
+      'http://localhost:3005',
+      process.env.FRONTEND_URL
+    ];
+    if (!origin || allowedOrigins.includes(origin) || origin.endsWith('.vercel.app')) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 }));
 
