@@ -6,9 +6,10 @@ const cors = require("cors");
 const app = express();
 const PORT = process.env.PORT || 5001;
 app.use(express.json());
-app.use(cors(
-
-));
+app.use(cors({
+  origin: ['http://localhost:3000', 'http://localhost:3005', 'https://exam-scheduler-frontend.vercel.app', process.env.FRONTEND_URL],
+  credentials: true
+}));
 
 app.get("/", (req, res) => {
   res.json({ message: "Exam Scheduler API is running", status: "success" });
