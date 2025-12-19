@@ -7,7 +7,7 @@ const app = express();
 const PORT = process.env.PORT || 5001;
 app.use(express.json());
 app.use(cors(
-  
+
 ));
 
 app.get("/", (req, res) => {
@@ -27,4 +27,4 @@ mongoose.connect(process.env.MONGO_URL)
 
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on port ${PORT}`);
-});
+}); 
